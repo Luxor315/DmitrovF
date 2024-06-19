@@ -63,7 +63,7 @@ public partial class feedObject
 
     private feedObjectPhones phonesField;
 
-    private feedObjectPhotos photosField;
+    private feedObjectPhotoSchema[] photosField;
 
     private bool isDachaField;
 
@@ -108,6 +108,8 @@ public partial class feedObject
     private feedObjectHouse houseField;
 
     private feedObjectBargainTerms bargainTermsField;
+
+    private string discountField;
 
     private string mortgagePaymentField;
 
@@ -229,7 +231,8 @@ public partial class feedObject
     }
 
     /// <remarks/>
-    public feedObjectPhotos Photos
+    [System.Xml.Serialization.XmlArrayItemAttribute("PhotoSchema", IsNullable = false)]
+    public feedObjectPhotoSchema[] Photos
     {
         get
         {
@@ -528,6 +531,19 @@ public partial class feedObject
     }
 
     /// <remarks/>
+    public string Discount
+    {
+        get
+        {
+            return this.discountField;
+        }
+        set
+        {
+            this.discountField = value;
+        }
+    }
+
+    /// <remarks/>
     public string MortgagePayment
     {
         get
@@ -588,8 +604,6 @@ public partial class feedObjectPhones
 
     private feedObjectPhonesPhoneSchema phoneSchemaField;
 
-    private string[] textField;
-
     /// <remarks/>
     public feedObjectPhonesPhoneSchema PhoneSchema
     {
@@ -600,20 +614,6 @@ public partial class feedObjectPhones
         set
         {
             this.phoneSchemaField = value;
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlTextAttribute()]
-    public string[] Text
-    {
-        get
-        {
-            return this.textField;
-        }
-        set
-        {
-            this.textField = value;
         }
     }
 }
@@ -660,47 +660,7 @@ public partial class feedObjectPhonesPhoneSchema
 [System.SerializableAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-public partial class feedObjectPhotos
-{
-
-    private feedObjectPhotosPhotoSchema[] photoSchemaField;
-
-    private string[] textField;
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute("PhotoSchema")]
-    public feedObjectPhotosPhotoSchema[] PhotoSchema
-    {
-        get
-        {
-            return this.photoSchemaField;
-        }
-        set
-        {
-            this.photoSchemaField = value;
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlTextAttribute()]
-    public string[] Text
-    {
-        get
-        {
-            return this.textField;
-        }
-        set
-        {
-            this.textField = value;
-        }
-    }
-}
-
-/// <remarks/>
-[System.SerializableAttribute()]
-[System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-public partial class feedObjectPhotosPhotoSchema
+public partial class feedObjectPhotoSchema
 {
 
     private string fullUrlField;
@@ -708,6 +668,8 @@ public partial class feedObjectPhotosPhotoSchema
     private bool isDefaultField;
 
     private string photoTypeField;
+
+    private string[] textField;
 
     /// <remarks/>
     public string FullUrl
@@ -747,6 +709,20 @@ public partial class feedObjectPhotosPhotoSchema
             this.photoTypeField = value;
         }
     }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlTextAttribute()]
+    public string[] Text
+    {
+        get
+        {
+            return this.textField;
+        }
+        set
+        {
+            this.textField = value;
+        }
+    }
 }
 
 /// <remarks/>
@@ -756,12 +732,12 @@ public partial class feedObjectPhotosPhotoSchema
 public partial class feedObjectJKSchema
 {
 
-    private ushort idField;
+    private uint idField;
 
     private string nameField;
 
     /// <remarks/>
-    public ushort Id
+    public uint Id
     {
         get
         {
